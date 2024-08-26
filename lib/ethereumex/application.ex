@@ -11,7 +11,14 @@ defmodule Ethereumex.Application do
 
   def start(_type, _args) do
     :ok = Counter.setup()
-    children = Config.setup_children()
+
+    children =
+      Config.setup_children() ++
+        [
+          {Registry, name: Ethereumex.WebSocketRegistry, keys: :unique},
+          {DynamicSupervisor, strategy: :one_for_one, name: Ethereumex.WebSocketSupervisor}
+        ]
+
     opts = [strategy: :one_for_one, name: Ethereumex.Supervisor]
     Supervisor.start_link(children, opts)
   end

@@ -45,6 +45,7 @@ defmodule Ethereumex.Mixfile do
   defp deps do
     [
       {:finch, "~> 0.16"},
+      {:mint_web_socket, "~> 1.0.4"},
       {:jason, "~> 1.4"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
